@@ -5,8 +5,13 @@ import org.springframework.web.bind.annotation.*;
 
 //Jedná se o pohodlnou anotaci, která kombinuje @Controller a @ResponseBody,
 // což eliminuje potřebu anotovat každou metodu zpracování požadavků třídy kontroleru pomocí @ResponseBody anotace
+
+
+// JAML/XML/JSON
+// JAML - tabulátor se používá pro zanoření
+// JOSN - pro další zanoření jsou použity složené závorky {}
+// XML - stromová struktura
 @RestController
-@RequestMapping("/api/v1")
 public class HelloController {
     @GetMapping("")
     public String helloWorld() {
