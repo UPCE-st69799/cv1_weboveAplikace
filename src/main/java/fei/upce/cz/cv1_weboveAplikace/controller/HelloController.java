@@ -1,5 +1,6 @@
 package fei.upce.cz.cv1_weboveAplikace.controller;
 
+import fei.upce.cz.cv1_weboveAplikace.bodyRequest.SimpleBody;
 import org.springframework.web.bind.annotation.*;
 
 //Jedná se o pohodlnou anotaci, která kombinuje @Controller a @ResponseBody,
@@ -21,5 +22,11 @@ public class HelloController {
     public String helloQueryParams(@RequestParam String message) {
         return "Hello with query params: " + message;
     }
+
+    @GetMapping("/body")
+    public String helloRequestBody(@RequestBody SimpleBody body) {
+        return "SimpleBody:  " + body.toString();
+    }
+
 }
 
