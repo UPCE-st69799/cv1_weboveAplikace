@@ -2,13 +2,14 @@ package fei.upce.cz.cv1_weboveAplikace.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-@Entity
-@NoArgsConstructor
+import java.util.Collections;
+import java.util.List;
+
 @Data
+@NoArgsConstructor
+@Entity
 public class AppUser {
     @Id
     private Long id;
@@ -27,5 +28,11 @@ public class AppUser {
 
     @Column
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "author")
+    private List<Task> tasks = Collections.emptyList();
+
+    @ManyToMany(mappedBy = "users")
+    private List<Role> roles = Collections.emptyList();
 }
 
