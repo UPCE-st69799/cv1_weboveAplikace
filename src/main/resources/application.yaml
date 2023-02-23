@@ -2,3 +2,13 @@ server:
   servlet:
     context-path: /api/v1
   port: 9000
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: nnpia
+    password: nnpia
+
+  jpa:
+    hibernate:
+      ddl-auto: update
