@@ -1,6 +1,7 @@
 package fei.upce.cz.cv1_weboveAplikace.component;
 
 import fei.upce.cz.cv1_weboveAplikace.repository.AppUserRepository;
+import fei.upce.cz.cv1_weboveAplikace.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -12,13 +13,21 @@ import org.springframework.transaction.annotation.Transactional;
 public class DatabaseRunner implements ApplicationRunner {
     private final AppUserRepository appUserRepository;
 
-    public DatabaseRunner(AppUserRepository appUserRepository) {
+    private final RoleRepository roleRepository;
+
+    public DatabaseRunner(AppUserRepository appUserRepository, RoleRepository roleRepository) {
         this.appUserRepository = appUserRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     @Transactional(readOnly = true)
     public void run(ApplicationArguments args) {
         appUserRepository.findAll().forEach(appUser -> log.info(appUser.toString()));
+
+        var role = roleRepository.findAll().iterator().next();
+
+        appUserRepository.findAllByRolesContaining(role)
+                .forEach(appUser -> log.info(appUser.toString()));
     }
 }
